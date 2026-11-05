@@ -15,6 +15,7 @@
 
 # Build output
 build/
+build-test/
 target/
 
 # Logs

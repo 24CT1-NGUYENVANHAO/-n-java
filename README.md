@@ -74,6 +74,26 @@ javac -d build -sourcepath src @sources.txt
 java -cp build app.Main
 ```
 
+## Chạy test với JUnit 5
+
+JUnit 5 được cung cấp bởi `lib/junit-platform-console-standalone.jar`.
+
+```bash
+# Biên dịch mã chính
+javac -d build -sourcepath src $(find src -name "*.java")
+
+# Biên dịch test (cần build/ và JUnit JAR trong classpath)
+javac -d build-test -cp "build;lib/junit-platform-console-standalone.jar" -sourcepath test $(find test -name "*.java")
+
+# Chạy toàn bộ test
+java -jar lib/junit-platform-console-standalone.jar --cp "build;build-test" --scan-class-path
+
+# Chạy một test cụ thể
+java -jar lib/junit-platform-console-standalone.jar --cp "build;build-test" --select-class model.DanhMucTest
+```
+
+Lưu ý: trên Windows CMD/PowerShell, thay dấu hai chấm `:` bằng dấu gạch ngang cụm `;` trong classpath (ví dụ: `build;lib/junit-platform-console-standalone.jar`).
+
 Lưu ý: tại thời điểm setup, tất cả thân hàm còn ném `UnsupportedOperationException` (stub). Cần triển khai lại theo `docs/danh-sach-chuc-nang.md` trước khi chạy thực tế.
 
 ## Các tệp đã tạo (25 tệp nguồn)
